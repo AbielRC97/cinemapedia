@@ -1,5 +1,6 @@
 package UI.Detalle
 
+import Models.Movie
 import Models.movies
 import UI.Shared.ScreenView
 import androidx.compose.foundation.layout.Column
@@ -27,14 +28,13 @@ import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetalleView() {
-    val movie = movies[0]
+fun DetalleView(movie: Movie, onBack: ()-> Unit) {
     ScreenView {
         Scaffold(topBar =  {
             TopAppBar(
                 title = { Text( movie.title ) },
                 navigationIcon = {
-                    IconButton(onClick = { }){
+                    IconButton(onClick = onBack ){
                         Icon(
                             imageVector = Icons.AutoMirrored.Default.ArrowBack,
                             contentDescription = "Go Back"

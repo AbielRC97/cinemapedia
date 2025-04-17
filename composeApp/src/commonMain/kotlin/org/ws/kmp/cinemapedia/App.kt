@@ -3,6 +3,7 @@ package org.ws.kmp.cinemapedia
 
 import UI.Detalle.DetalleView
 import UI.Home.HomeView
+import UI.Shared.Navigation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import coil3.ImageLoader
@@ -20,6 +21,6 @@ fun App() {
         .crossfade(true)
         .logger(DebugLogger())
         .build()  }
-    DetalleView()
+        Navigation()
     }
 

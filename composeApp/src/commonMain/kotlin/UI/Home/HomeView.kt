@@ -3,6 +3,7 @@ package UI.Home
 import Models.Movie
 import Models.movies
 import UI.Shared.ScreenView
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,7 +29,7 @@ import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView() {
+fun HomeView(onMovieClick: (Movie) -> Unit) {
     ScreenView {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior();
         Scaffold(
@@ -49,7 +50,7 @@ fun HomeView() {
                 modifier = Modifier.padding(padding)
             ) {
                 items(movies, key = { it.id }){
-                    MovieItem(movie = it)
+                    MovieItem(movie = it, onClick = { onMovieClick(it)})
                 }
             }
         }
@@ -57,8 +58,10 @@ fun HomeView() {
 }
 
 @Composable
-fun MovieItem(movie: Movie) {
-    Column {
+fun MovieItem(movie: Movie, onClick: () -> Unit) {
+    Column(
+        modifier = Modifier.clickable(onClick = onClick)
+    ) {
 
         AsyncImage(
             model = movie.poster,
