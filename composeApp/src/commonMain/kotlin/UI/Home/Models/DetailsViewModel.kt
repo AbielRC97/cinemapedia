@@ -1,7 +1,6 @@
 package UI.Home.Models
 
 import Models.Movie
-import Models.RemoteMovie
 import UI.Home.Repository.MoviesRepository
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,21 +9,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
-    private val repository: MoviesRepository
-) :  ViewModel() {
+class DetailsViewModel(private  val id: Int,
+     private val repository: MoviesRepository) : ViewModel() {
+
     var state by mutableStateOf(UIState())
         private  set
+
     init {
         viewModelScope.launch {
             state = UIState(loading = true)
-            state = UIState(loading = false,
-                movies = repository.fetchPopularMovies()
+            state =  UIState(
+                loading = false,
+                movie = repository.fetchMovieById(id)
             )
         }
     }
-    data class UIState (
+
+    data class UIState(
         val loading: Boolean = false,
-        val movies: List<Movie> = emptyList()
+        val movie: Movie? = null
     )
 }
