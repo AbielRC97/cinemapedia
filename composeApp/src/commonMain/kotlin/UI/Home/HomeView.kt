@@ -35,7 +35,7 @@ import coil3.compose.AsyncImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView(onMovieClick: (Movie) -> Unit, vm: HomeViewModel = viewModel {  HomeViewModel() }) {
+fun HomeView(onMovieClick: (Movie) -> Unit, vm: HomeViewModel ) {
     ScreenView {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior();
         Scaffold(
